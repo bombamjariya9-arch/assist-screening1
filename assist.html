@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>แบบคัดกรองยาเสพติด ASSIST</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+background:#eef2f7;
+padding:20px;
+}
+
+.container{
+max-width:750px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 12px rgba(0,0,0,0.15);
+}
+
+h1{
+text-align:center;
+color:#1e73be;
+}
+
+.question{
+margin-top:20px;
+font-size:16px;
+}
+
+.options{
+margin-top:8px;
+}
+
+button{
+margin-top:25px;
+padding:12px 25px;
+background:#1e73be;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+.result{
+margin-top:25px;
+padding:15px;
+border-radius:8px;
+font-size:18px;
+}
+
+.low{
+background:#d4edda;
+color:#155724;
+}
+
+.medium{
+background:#fff3cd;
+color:#856404;
+}
+
+.high{
+background:#f8d7da;
+color:#721c24;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>แบบประเมินคัดกรองยาเสพติด (ASSIST)</h1>
+
+<div class="question">
+1. เคยใช้สารเสพติดหรือไม่
+<div class="options">
+<input type="radio" name="q1" value="0"> ไม่เคย
+<input type="radio" name="q1" value="3"> เคย
+</div>
+</div>
+
+<div class="question">
+2. ในช่วง 3 เดือนที่ผ่านมา ใช้บ่อยแค่ไหน
+<div class="options">
+<input type="radio" name="q2" value="0"> ไม่เคย
+<input type="radio" name="q2" value="2"> เดือนละครั้ง
+<input type="radio" name="q2" value="3"> สัปดาห์ละครั้ง
+<input type="radio" name="q2" value="4"> เกือบทุกวัน
+</div>
+</div>
+
+<div class="question">
+3. เคยมีความต้องการใช้สารเสพติดอย่างรุนแรงหรือไม่
+<div class="options">
+<input type="radio" name="q3" value="0"> ไม่เคย
+<input type="radio" name="q3" value="3"> บางครั้ง
+<input type="radio" name="q3" value="4"> บ่อย
+</div>
+</div>
+
+<div class="question">
+4. เคยเกิดปัญหาสุขภาพจากการใช้สารเสพติดหรือไม่
+<div class="options">
+<input type="radio" name="q4" value="0"> ไม่เคย
+<input type="radio" name="q4" value="4"> เคย
+</div>
+</div>
+
+<div class="question">
+5. เคยละเลยหน้าที่จากการใช้สารเสพติดหรือไม่
+<div class="options">
+<input type="radio" name="q5" value="0"> ไม่เคย
+<input type="radio" name="q5" value="5"> เคย
+</div>
+</div>
+
+<div class="question">
+6. มีคนแสดงความกังวลเกี่ยวกับการใช้สารเสพติดของคุณหรือไม่
+<div class="options">
+<input type="radio" name="q6" value="0"> ไม่มี
+<input type="radio" name="q6" value="3"> เคย
+</div>
+</div>
+
+<div class="question">
+7. เคยพยายามลดหรือหยุดใช้แต่ไม่สำเร็จหรือไม่
+<div class="options">
+<input type="radio" name="q7" value="0"> ไม่เคย
+<input type="radio" name="q7" value="4"> เคย
+</div>
+</div>
+
+<div class="question">
+8. เคยฉีดสารเสพติดหรือไม่
+<div class="options">
+<input type="radio" name="q8" value="0"> ไม่เคย
+<input type="radio" name="q8" value="2"> เคย
+</div>
+</div>
+
+<button onclick="calculateScore()">ประเมินผล</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+function calculateScore(){
+
+let score = 0;
+
+for(let i=1;i<=8;i++){
+let q = document.querySelector('input[name="q'+i+'"]:checked');
+if(q){
+score += parseInt(q.value);
+}
+}
+
+let resultText="";
+let className="";
+
+if(score <=3){
+resultText="ความเสี่ยงต่ำ (Low Risk)";
+className="low";
+}
+
+else if(score <=26){
+resultText="ความเสี่ยงปานกลาง (Moderate Risk) ควรให้คำปรึกษา";
+className="medium";
+}
+
+else{
+resultText="ความเสี่ยงสูง (High Risk) ควรส่งต่อบำบัดรักษา";
+className="high";
+}
+
+document.getElementById("result").className="result "+className;
+document.getElementById("result").innerHTML=
+"คะแนนรวม : "+score+" คะแนน <br>"+resultText;
+
+}
+
+</script>
+
+</body>
+</html>
